@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width" />
+    <title>CRUD ATVS4</title>
+  </head>
+  <h1>Atualização de experiencias</h1>
+
+    <form name="form1" method="post" action="/atualizaexperiencia">
+        NOME EMPRESA: <input type="text" id="NOME_EMPRESA" name="NOME_EMPRESA" value="" required>
+        <br>
+        INICIO NA EMPRESA: <input type="text" id="INICIO_EMPRESA" name="INICIO_EMPRESA" value="" required>
+        <br>
+        FIM DO CONTRATO: <input type="text" id="FIM_EMPRESA" name="FIM_EMPRESA" required>
+        <br>
+        CARGO: <input type="text" id="CARGO" name="CARGO" required>
+        <br>
+        DESCRICAO DO CARGO: <input type="text" id="DESCRICAO_CARGO" name="DESCRICAO_CARGO" required>
+        <br>
+        <input type="hidden" id="ID_UDUARIO" name="ID_UDUARIO" value="">
+        
+        <input type="submit" value="ATUALIZAR">  
+    </form>    
+
+    <script>
+        let url = new URL(window.location.href);
+        let params = url.searchParams;
+        url = '/atualizaexperiencia?ID_UDUARIO='+url.searchParams.get("ID_UDUARIO");
+
+        fetch(url)
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            let experiencias = data;
+
+            experiencias.map(function(EXPERIENCIA) {
+                document.getElementById('ID_UDUARIO').value = EXPERIENCIA.ID_UDUARIO;
+                document.getElementById('NOME_EMPRESA').value = EXPERIENCIA.NOME_EMPRESA;
+                document.getElementById('INICIO_EMPRESA').value = EXPERIENCIA.INICIO_EMPRESA;
+                document.getElementById('FIM_EMPRESA').value = EXPERIENCIA.FIM_EMPRESA;
+                document.getElementById('CARGO').value = EXPERIENCIA.CARGO;
+                document.getElementById('DESCRICAO_CARGO').value = EXPERIENCIA.DESCRICAO_CARGO;
+            });
+            alert(response.json());
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+    </script>
+</body>
+</html>

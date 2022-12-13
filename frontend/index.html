@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="estilo2.css">
+    <title>CRUD ATVS4</title>
+  </head>
+
+  <body>
+      <div class="container"><br><br>
+          <hr class="hr_dados1"><br><br>
+          <img src="fotominha.jpg" class="fotominha" alt="eu"width="250"height="200">
+          <h3>25 anos, Masculino</h3>
+          <h3>Rua M.M.D.C, N° 80 - 05510021, São Paulo - SP</h3>
+          <h3>(11)94210 - 6601</h3>
+          <h3>Email: luiz_covas@hotmail.com</h3>
+          <br>
+          <hr class="hr_01"><br>
+          <h3>Colocar em pratica tudo que estou aprendendo no Inteli.</h3><br><br>
+          <hr class="hr_02"><br>
+          <h3>Estou fazendo uma transição de carreira para uma área que sempre sonhei em trabalhar</h3><br>
+          <hr class="hr_03"><br>
+          <h3>Graduação - Engenharia de software</h3>
+          <h4>Inteli - Instituto de tecnologia e liderança - 2022 a 2026</h4>
+          <h3>Tecnico em Quimica</h3>
+          <h4>Colegio Clovis Bevilacqua - 2015 a 2016</h4><br>
+          <hr class="hr_04"><br>
+          <div id="resultado"><br></div>
+          <p><a href="/inserir.html">INSERIR NOVA EXPERIENCIA</a></p>
+          <hr class="hr_05"><br>
+          <ul>
+              <li>
+                  Microsoft Visual Studio Code, GitHub e Godot
+              </li>
+              <li>
+                  BootStrap
+              </li>
+              <li>
+                  Pacote Office   
+              </li>
+              <li>
+                  Gerenciamento de Equipe
+              </li>
+          </ul><br>
+          <hr class="hr_06"><br>
+          <h3>Inglês Intermediario</h3><br><br>
+          <hr class="hr_07"><br>
+          <ul>
+              <li>
+                  Html e Css
+              </li>
+              <li>
+                  JavaScript
+              </li>
+          </ul><br>
+
+          <br>
+
+          <hr class="hr_08"><br>
+          <div class="font">
+              <h5>Compartilhar:</h5><br>
+              <a href="https://www.linkedin.com/in/lfcovas97/">
+              <p>linkedin</p></a>
+
+              <a href="https://www.instagram.com/lfcovas/">
+              <p>Instagram</p></a>
+
+              <a href="https://github.com/lf-covas">
+              <p>GitHub</p></a>
+
+              <a href="https://wa.me/942106601">
+              <p>Whats App</p></a>
+          </div> <br>
+    </div>
+  </body>
+
+
+  <script>
+    const url = '/experiencia';
+  
+    fetch(url)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        let experiencia = data;
+        let saida = '';
+        experiencia.map(function(EXPERIENCIA) {
+          saida += '<strong> '+ `${EXPERIENCIA.NOME_EMPRESA}:` + '</strong> ' + `${EXPERIENCIA.INICIO_EMPRESA}`  + ' - ' +  `${EXPERIENCIA.FIM_EMPRESA}` + ' - ' + '</strong> ' + `${EXPERIENCIA.CARGO}` + ' - ' + '</strong> ' + `${EXPERIENCIA.DESCRICAO_CARGO}` ;
+          saida += ' - <a href="/atualizar.html?ID_UDUARIO=' + `${EXPERIENCIA.ID_UDUARIO}` + '">EDITAR</a>';
+          saida += ' | <a href="/removeexperiencia?ID_UDUARIO='+`${EXPERIENCIA.ID_UDUARIO}`+'">REMOVER</a></br>';
+        });
+        document.getElementById('resultado').innerHTML = saida;
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  </script>
+
+</html>
